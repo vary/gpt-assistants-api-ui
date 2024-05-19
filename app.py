@@ -13,6 +13,7 @@ from typing_extensions import override
 azure_openai_endpoint = os.environ.get("AZURE_OPENAI_ENDPOINT")
 azure_openai_key = os.environ.get("AZURE_OPENAI_KEY")
 openai_api_key = os.environ.get("OPENAI_API_KEY")
+openai_api_base = os.environ.get("OPENAI_API_BASE")
 client = None
 if azure_openai_endpoint and azure_openai_key:
     client = openai.AzureOpenAI(
@@ -21,7 +22,7 @@ if azure_openai_endpoint and azure_openai_key:
         azure_endpoint=azure_openai_endpoint,
     )
 else:
-    client = openai.OpenAI(api_key=openai_api_key)
+    client = openai.OpenAI(api_key=openai_api_key, api_base=openai_api_base)
 assistant_id = os.environ.get("ASSISTANT_ID")
 instructions = os.environ.get("RUN_INSTRUCTIONS", "")
 assistant_title = os.environ.get("ASSISTANT_TITLE", "Assistants API UI")
